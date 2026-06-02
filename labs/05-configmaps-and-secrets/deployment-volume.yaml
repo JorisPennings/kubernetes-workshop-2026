@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-volume-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-volume-demo
+  template:
+    metadata:
+      labels:
+        app: config-volume-demo
+    spec:
+      containers:
+        - name: app
+          image: busybox:latest
+          command: ["sleep", "3600"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config
+            items:
+              - key: config.properties
+                path: config.properties
