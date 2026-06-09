@@ -6,7 +6,7 @@ Learn how to persist data using PersistentVolumeClaims so your data survives pod
 
 ## Tasks
 
-### 6.1 — Check available StorageClasses
+### 6.1 - Check available StorageClasses
 
 ```bash
 kubectl get storageclasses
@@ -14,7 +14,11 @@ kubectl get storageclasses
 
 **Question:** What StorageClass is available? Is there a default?
 
-### 6.2 — Create a PersistentVolumeClaim
+### 6.2 - Create a PersistentVolumeClaim
+
+First, inspect the PersistentVolumeClaim manifest (see [pvc.yaml](pvc.yaml)) to understand what it requests.
+
+Then apply it:
 
 ```bash
 kubectl apply -f pvc.yaml
@@ -28,7 +32,11 @@ kubectl get pvc
 
 **Question:** What is the status of the PVC? (It may be `Pending` until a pod uses it with local-path-storage.)
 
-### 6.3 — Deploy a pod that writes to the volume
+### 6.3 - Deploy a pod that writes to the volume
+
+First, inspect the Deployment manifest (see [deployment-storage.yaml](deployment-storage.yaml)) to see how it mounts the volume.
+
+Then apply it:
 
 ```bash
 kubectl apply -f deployment-storage.yaml
@@ -39,6 +47,14 @@ Wait for it to be running:
 ```bash
 kubectl get pods -l app=storage-demo -w
 ```
+
+Now check the PVC status again:
+
+```bash
+kubectl get pvc
+```
+
+**Question:** What changed? Is the PVC now `Bound`?
 
 Write some data:
 
@@ -52,7 +68,7 @@ Verify:
 kubectl exec -it $(kubectl get pod -l app=storage-demo -o name | head -1) -- cat /data/hello.txt
 ```
 
-### 6.4 — Test persistence across pod restarts
+### 6.4 - Test persistence across pod restarts
 
 Delete the pod (the Deployment will recreate it):
 
@@ -74,7 +90,7 @@ kubectl exec -it $(kubectl get pod -l app=storage-demo -o name | head -1) -- cat
 
 **Question:** Is the file still there? Why?
 
-### 6.5 — Inspect the PersistentVolume
+### 6.5 - Inspect the PersistentVolume
 
 ```bash
 kubectl get pv
@@ -83,7 +99,7 @@ kubectl describe pv $(kubectl get pv -o name | head -1)
 
 **Question:** Where on the node is the data actually stored?
 
-### 6.6 — Clean up
+### 6.6 - Clean up
 
 ```bash
 kubectl delete -f deployment-storage.yaml

@@ -6,13 +6,17 @@ Learn how Services provide stable networking to access your pods.
 
 ## Tasks
 
-### 4.1 — Deploy the app
+### 4.1 - Deploy the app
 
 ```bash
 kubectl apply -f deployment.yaml
 ```
 
-### 4.2 — Create a ClusterIP Service
+### 4.2 - Create a ClusterIP Service
+
+First, inspect the Service manifest (see [service-clusterip.yaml](service-clusterip.yaml)) to understand how it's configured.
+
+Then apply it:
 
 ```bash
 kubectl apply -f service-clusterip.yaml
@@ -26,17 +30,21 @@ kubectl get services
 
 **Question:** What ClusterIP was assigned?
 
-### 4.3 — Test internal access
+### 4.3 - Test internal access
 
-Start a temporary pod to curl the service:
+Start a temporary pod with curl to test the service:
 
 ```bash
-kubectl run curl-test --image=curlimages/curl --rm -it -- curl http://hello-service:5678
+kubectl run curl-test --image=alpine:latest --rm -it -- sh -c "apk add curl && curl http://hello-service:5678"
 ```
 
 **Question:** What response do you get?
 
-### 4.4 — Create a NodePort Service
+### 4.4 - Create a NodePort Service
+
+First, inspect the Service manifest (see [service-nodeport.yaml](service-nodeport.yaml)) to understand how it differs from the ClusterIP service.
+
+Then apply it:
 
 ```bash
 kubectl apply -f service-nodeport.yaml
@@ -48,19 +56,13 @@ Check the assigned port:
 kubectl get service hello-nodeport
 ```
 
-Access it (minikube):
-
-```bash
-minikube service hello-nodeport --url
-```
-
-Or directly:
+curl it from you PC
 
 ```bash
 curl http://<node-ip>:<node-port>
 ```
 
-### 4.5 — Clean up
+### 4.5 - Clean up
 
 ```bash
 kubectl delete -f deployment.yaml

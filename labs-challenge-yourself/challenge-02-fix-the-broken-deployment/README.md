@@ -26,7 +26,7 @@ Start by checking pod status: are they running, pending, or in an error state? U
 <details>
 <summary>Hint 2</summary>
 
-Look carefully at labels and selectors — do the Services match the Pods they're supposed to target?
+Look carefully at labels and selectors - do the Services match the Pods they're supposed to target?
 
 </details>
 

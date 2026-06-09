@@ -6,7 +6,11 @@ Learn how to externalize configuration using ConfigMaps and sensitive data using
 
 ## Tasks
 
-### 5.1 — Create a ConfigMap
+### 5.1 - Create a ConfigMap
+
+First, inspect the ConfigMap manifest (see [configmap.yaml](configmap.yaml)) to understand what configuration it defines.
+
+Then apply it:
 
 ```bash
 kubectl apply -f configmap.yaml
@@ -18,7 +22,11 @@ Inspect it:
 kubectl describe configmap app-config
 ```
 
-### 5.2 — Create a Secret
+### 5.2 - Create a Secret
+
+First, inspect the Secret manifest (see [secret.yaml](secret.yaml)) to see how sensitive data is defined.
+
+Then apply it:
 
 ```bash
 kubectl apply -f secret.yaml
@@ -32,21 +40,27 @@ kubectl get secret app-secret -o yaml
 
 **Question:** Are the values readable? How are they encoded?
 
-### 5.3 — Deploy an app using the ConfigMap and Secret
+### 5.3 - Deploy an app using the ConfigMap and Secret
+
+Inspect the Deployment manifest (see [deployment.yaml](deployment.yaml)) to see how it references the ConfigMap and Secret.
+
+Then deploy it:
 
 ```bash
 kubectl apply -f deployment.yaml
 ```
 
-Check the environment variables inside the pod:
+Check the environment variables inside the pod.
 
-```bash
-kubectl exec -it $(kubectl get pod -l app=config-demo -o name | head -1) -- env | grep -E "APP_|DB_"
-```
+**💡 kubectl exec hint:** `kubectl exec` runs a command inside a pod. The `-it` flags enable interactive mode (`-i`) and allocate a TTY (`-t`). The `--` separates kubectl arguments from the command to run inside the container.
 
 **Question:** Can you see both the ConfigMap values and the Secret values?
 
-### 5.4 — Mount ConfigMap as a file
+### 5.4 - Mount ConfigMap as a file
+
+Inspect the Deployment manifest (see [deployment-volume.yaml](deployment-volume.yaml)) to see how it mounts a ConfigMap as a volume.
+
+Then apply it:
 
 ```bash
 kubectl apply -f deployment-volume.yaml
@@ -58,7 +72,7 @@ Check the mounted file:
 kubectl exec -it $(kubectl get pod -l app=config-volume-demo -o name | head -1) -- cat /etc/config/config.properties
 ```
 
-### 5.5 — Clean up
+### 5.5 - Clean up
 
 ```bash
 kubectl delete -f configmap.yaml

@@ -2,11 +2,11 @@
 
 ## Objective
 
-Learn how to create and manage Pods — the smallest deployable unit in Kubernetes.
+Learn how to create and manage Pods, the smallest deployable unit in Kubernetes.
 
 ## Tasks
 
-### 2.1 — Run a pod imperatively
+### 2.1 - Run a pod imperatively
 
 ```bash
 kubectl run my-nginx --image=nginx:latest
@@ -18,7 +18,7 @@ Check that it's running:
 kubectl get pods
 ```
 
-### 2.2 — Inspect the pod
+### 2.2 - Inspect the pod
 
 ```bash
 kubectl describe pod my-nginx
@@ -26,13 +26,13 @@ kubectl describe pod my-nginx
 
 **Question:** What IP address was assigned to the pod? What node is it running on?
 
-### 2.3 — View pod logs
+### 2.3 - View pod logs
 
 ```bash
 kubectl logs my-nginx
 ```
 
-### 2.4 — Execute a command inside the pod
+### 2.4 - Execute a command inside the pod
 
 ```bash
 kubectl exec -it my-nginx -- /bin/bash
@@ -45,9 +45,11 @@ curl localhost
 exit
 ```
 
-### 2.5 — Create a pod from a YAML manifest
+### 2.5 - Create a pod from a YAML manifest
 
-Apply the provided manifest:
+First, inspect the Pod manifest (see [pod.yaml](pod.yaml)) to understand what it defines.
+
+Then apply it:
 
 ```bash
 kubectl apply -f pod.yaml
@@ -59,7 +61,7 @@ Verify it's running:
 kubectl get pods
 ```
 
-### 2.6 — Clean up
+### 2.6 - Clean up
 
 ```bash
 kubectl delete pod my-nginx

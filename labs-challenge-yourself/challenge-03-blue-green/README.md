@@ -2,7 +2,7 @@
 
 ## The Goal
 
-Perform a blue-green deployment: run two versions of an app simultaneously, then switch traffic from the old version ("blue") to the new version ("green") instantly — with zero downtime.
+Perform a blue-green deployment: run two versions of an app simultaneously, then switch traffic from the old version ("blue") to the new version ("green") instantly - with zero downtime.
 
 ## Scenario
 
@@ -23,7 +23,7 @@ Perform a blue-green deployment: run two versions of an app simultaneously, then
 <details>
 <summary>Hint 1</summary>
 
-You'll need two separate Deployments — one for blue, one for green. They should have different label values to distinguish them.
+You'll need two separate Deployments - one for blue, one for green. They should have different label values to distinguish them.
 
 </details>
 
@@ -44,7 +44,7 @@ You can edit a Service's selector with `kubectl patch` or by applying an updated
 <details>
 <summary>Hint 4</summary>
 
-Test with a loop: `while true; do curl <service-url>; sleep 1; done` — you should see the response change instantly when you switch.
+Test with a loop: `while true; do curl <service-url>; sleep 1; done` - you should see the response change instantly when you switch.
 
 </details>
 

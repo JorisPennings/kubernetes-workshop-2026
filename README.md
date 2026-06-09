@@ -4,7 +4,7 @@ A hands-on beginner workshop to get familiar with Kubernetes fundamentals.
 
 ## Prerequisites
 
-- A running Kubernetes cluster — see [SETUP.md](SETUP.md) for installation options
+- A running Kubernetes cluster - see [SETUP.md](SETUP.md) for installation options
 - `kubectl` installed and configured
 - Basic terminal/command-line experience
 
@@ -36,7 +36,7 @@ Then proceed to [Lab 1](labs/01-exploring-the-cluster/README.md).
 
 ## Bonus: Challenge Yourself
 
-Finished all the labs? Try these open-ended challenges — no step-by-step commands, just requirements and hints:
+Finished all the labs? Try these open-ended challenges - no step-by-step commands, just requirements and hints:
 
 | Challenge | Description |
 |-----------|-------------|

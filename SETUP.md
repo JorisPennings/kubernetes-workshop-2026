@@ -20,7 +20,7 @@ Rancher Desktop provides a GUI and bundles everything you need.
 2. Select **containerd** as the container runtime
 3. Choose a Kubernetes version (latest stable is fine)
 4. Wait for the cluster to start (you'll see a green indicator)
-5. `kubectl` is included — open a terminal and verify:
+5. `kubectl` is included - open a terminal and verify:
 
 ```bash
 kubectl get nodes
