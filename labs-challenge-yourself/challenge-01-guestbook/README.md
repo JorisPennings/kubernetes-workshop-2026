@@ -12,7 +12,7 @@ All components need to be able to find each other by name.
 ## Requirements
 
 - The frontend should use the image `gcr.io/google-samples/gb-frontend:v5`
-- The Redis leader should use `redis:latest` 
+- The Redis leader should use `redis:6` 
 - The Redis followers should use `gcr.io/google-samples/gb-redis-follower:v2`
 - The frontend needs an environment variable `GET_HOSTS_FROM=dns`
 - The frontend should be accessible from your browser

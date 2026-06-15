@@ -48,6 +48,13 @@ Test with a loop: `while true; do curl <service-url>; sleep 1; done` - you shoul
 
 </details>
 
+<details>
+<summary>Hint 5</summary>
+
+If you're using `kubectl port-forward` and requests don't seem to switch after patching the service, stop and restart the port-forward. The tunnel binds to the old endpoints and won't automatically reconnect to the new ones.
+
+</details>
+
 ## Success Criteria
 
 - [ ] Both blue and green deployments are running simultaneously
