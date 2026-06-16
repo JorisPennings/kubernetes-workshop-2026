@@ -59,13 +59,17 @@ kubectl get pvc
 Write some data:
 
 ```bash
-kubectl exec -it $(kubectl get pod -l app=storage-demo -o name | head -1) -- sh -c "echo 'Hello from persistent storage!' > /data/hello.txt"
+# Zoek je pod naam
+kubectl get pods -l app=storage-demo
+
+# Schrijf data naar de volume
+kubectl exec -it <pod-name> -- sh -c "echo 'Hello from persistent storage!' > /data/hello.txt"
 ```
 
 Verify:
 
 ```bash
-kubectl exec -it $(kubectl get pod -l app=storage-demo -o name | head -1) -- cat /data/hello.txt
+kubectl exec -it <pod-name> -- cat /data/hello.txt
 ```
 
 ### 6.4 - Test persistence across pod restarts
@@ -85,7 +89,11 @@ kubectl get pods -l app=storage-demo -w
 Check if the data survived:
 
 ```bash
-kubectl exec -it $(kubectl get pod -l app=storage-demo -o name | head -1) -- cat /data/hello.txt
+# Zoek de nieuwe pod naam
+kubectl get pods -l app=storage-demo
+
+# Controleer of de data er nog is
+kubectl exec -it <pod-name> -- cat /data/hello.txt
 ```
 
 **Question:** Is the file still there? Why?
@@ -94,7 +102,9 @@ kubectl exec -it $(kubectl get pod -l app=storage-demo -o name | head -1) -- cat
 
 ```bash
 kubectl get pv
-kubectl describe pv $(kubectl get pv -o name | head -1)
+
+# Gebruik de PV naam uit de output
+kubectl describe pv <pv-name>
 ```
 
 **Question:** Where on the node is the data actually stored?
