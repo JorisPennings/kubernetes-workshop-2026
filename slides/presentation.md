@@ -149,25 +149,24 @@ Worker Node
 
 ```
   Jij (kubectl)
-     │
+     │  "Ik wil 3 nginx pods"
      ▼
-┌─────────────┐     "Ik wil 3 nginx pods"
+┌─────────────┐
 │  API Server │ ◄── opgeslagen in etcd
-└──────┬──────┘
-       │
-  ┌────┴────┐
-  ▼         ▼
-Scheduler   Controller Manager
-  │         │
-  │         └── "Er draaien er maar 2 → start er 1 bij"
-  │
-  └── "Pod naar Node 2 sturen"
-       │
-       ▼
-  ┌─────────┐
-  │ kubelet  │  → start de container
-  │ (Node 2) │
-  └─────────┘
+└──┬───┬───┬──┘
+   │   │   │
+   │   │   │  ① watcht → ziet: 2 pods, maar 3 gewenst
+   │   │   └──── Controller Manager
+   │   │              │
+   │   │              └── maakt Pod object aan via API Server
+   │   │
+   │   │  ② watcht → ziet: pod zonder node
+   │   └──── Scheduler
+   │              │
+   │              └── schrijft nodeName via API Server
+   │
+   │  ③ watcht → ziet: pod toegewezen aan mij
+   └──── kubelet (Node 2) → start de container
 ```
 
 ---
@@ -246,9 +245,9 @@ Pods krijgen willekeurige IP-adressen die veranderen. Een **Service** geeft ze e
     │  Service   │
     │ 10.0.0.100 │
     └──────┬─────┘
-┌──────┬──┴──┬──────┐
-▼      ▼     ▼
-Pod 1  Pod 2 Pod 3
+┌──────┬───┴──┬──────┐
+▼      ▼      ▼      ▼
+Pod 1  Pod 2 Pod 3 Pod 4
 ```
 
 </div>
@@ -319,12 +318,12 @@ data:
 Pods zijn **tijdelijk** - als een pod stopt, is de data weg. PersistentVolumes lossen dit op.
 
 ```
-┌────────────────┐
-│      Pod       │
-│  ┌──────────┐  │      ┌──────────────────┐
+┌─────────────────┐
+│       Pod       │
+│  ┌───────────┐  │      ┌──────────────────┐
 │  │ container │──┼──────│ PersistentVolume │
-│  └──────────┘  │      │  (opslag op disk) │
-└────────────────┘      └──────────────────┘
+│  └───────────┘  │      │ (opslag op disk) │
+└─────────────────┘      └──────────────────┘
 ```
 
 - **PersistentVolumeClaim (PVC)**: je vraagt opslag aan
@@ -348,7 +347,7 @@ kubectl apply -f deployment.yaml
 ```
 
 Kubernetes **reconcileert continu**:
-gewenste state ≠ werkelijke state → actie ondernemen
+gewenste state != werkelijke state → actie ondernemen
 
 ---
 

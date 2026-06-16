@@ -69,7 +69,11 @@ kubectl apply -f deployment-volume.yaml
 Check the mounted file:
 
 ```bash
-kubectl exec -it $(kubectl get pod -l app=config-volume-demo -o name | head -1) -- cat /etc/config/config.properties
+# Zoek je pod naam
+kubectl get pods -l app=config-volume-demo
+
+# Gebruik de naam uit de output
+kubectl exec -it <pod-name> -- cat /etc/config/config.properties
 ```
 
 ### 5.5 - Clean up
