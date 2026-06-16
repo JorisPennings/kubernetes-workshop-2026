@@ -82,7 +82,7 @@ To access the Ingress on localhost:8080, you need to port-forward the Ingress co
 **For Rancher Desktop (Traefik):**
 
 ```bash
-kubectl port-forward -n kube-system svc/traefik 8080:80 &
+kubectl port-forward -n kube-system svc/traefik 8080:80
 ```
 
 **For minikube (NGINX):**
