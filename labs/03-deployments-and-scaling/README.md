@@ -100,19 +100,7 @@ kubectl get pods
 
 **Question:** Are the pods running again? What happened when you rolled back?
 
-### 3.6 - Rollback
-
-```bash
-kubectl rollout undo deployment/hello-deployment
-```
-
-Verify:
-
-```bash
-kubectl rollout status deployment/hello-deployment
-```
-
-### 3.7 - Clean up
+### 3.6 - Clean up
 
 ```bash
 kubectl delete -f deployment.yaml
