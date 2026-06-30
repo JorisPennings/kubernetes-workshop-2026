@@ -19,7 +19,7 @@ minikube addons enable ingress
 Rancher Desktop comes with **Traefik** pre-installed as the default Ingress controller, so you don't need to install anything! You can verify it's running:
 
 ```bash
-kubectl get pods -n kube-system | grep traefik
+kubectl get pods -n kube-system -l app.kubernetes.io/name=traefik
 ```
 
 **For other platforms (or if you prefer NGINX):**
